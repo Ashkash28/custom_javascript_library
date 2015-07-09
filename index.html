@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>JavaScript Library</title>
+		
+	</head>
+
+	<body>
+		<script>
+			var J_Library = ( function() {
+			  return {
+			   map: function(c, d) {  
+			   	var j = [];
+			   	if(Array.isArray(c))
+			   		{
+			   			for(var i = 0; i<c.length; i++)
+			   			{
+			   				j.push(d(c[i]));
+			   			}
+			   			return j;
+			   		}
+			   		else
+			   		{
+						for(i in c)
+						{
+							j.push(d(c[i]));
+						}
+						return j; 
+			   		}
+
+			},
+			   reduce: function(a, b, c) { 
+
+			   	if(c == undefined){
+			   		c = a[0];
+
+			   	}
+			   	
+			   	for(var i = 0; i<a.length; i++)
+			   	{
+			   		c = b(c, a[i]);
+			   	}
+			   	return c;
+
+
+			},
+			   find: function(a, b) { 
+			   	for(var i = 0; i<a.length; i++){
+			   		if(b(a[i]) === true){
+			   			return a[i];
+			   		}
+			   	}
+
+			},
+			   filter: function(a, b) { 
+				   	j = [];
+				    for(var i = 0; i<a.length; i++){
+
+				   		if(b(a[i]) === true) {
+
+				   			j.push(a[i]);
+				   		}
+				   }
+				   return j;
+			   },
+
+			   reject: function(a, b) { 
+			   	j = [];
+			   	for(var i = 0; i<a.length; i++){
+			   		if(b(a[i]) === false){
+			   			j.push(a[i]);
+			   		}
+			   	}
+			   	return j;
+			  }
+			}
+		}
+			)();
+
+			var evens = J_Library.filter([1, 2, 3, 4, 5, 6], function(num){  return num % 2 == 0; });
+
+			console.log(evens);
+
+			// var maps = J_Library.map([1, 2, 3], function(num){ return num * 3; });
+			// var map1 = J_Library.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
+
+			// console.log(map1);
+
+			// var sum = J_Library.reduce([1, 2, 3], function(memo, num){ return memo + num; });
+			// console.log(sum);
+
+			// var even = J_Library.find([1, 3, 3, 4, 6, 3], function(num){ return num % 2 == 0; });
+			// console.log(even);
+
+			// var odds = J_Library.reject([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+			// console.log(odds);
+
+
+
+
+		</script>
+	</body>
+</html>
